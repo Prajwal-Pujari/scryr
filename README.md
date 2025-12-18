@@ -21,7 +21,7 @@ pip install scryr
 Or install from source:
 
 ```bash
-git clone https://github.com/yourusername/scryr.git
+git clone https://github.com/Prajwal-Pujari/scryr.git
 cd scryr
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -200,4 +200,4 @@ Contributions welcome! Please feel free to submit a Pull Request.
 
 ## Author
 
-Your Name (your.email@example.com)
+Prajwal (imprajwal793@gmail.com)
