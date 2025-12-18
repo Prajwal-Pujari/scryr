@@ -54,6 +54,10 @@ Add custom ignore patterns:
 ```bash
 scryr . --ignore logs --ignore temp
 ```
+Help
+```bash
+scryr --help
+```
 
 ## Example Output
 
