@@ -4,13 +4,13 @@ A minimal CLI tool that maps project structure and intent across **all programmi
 
 ## Features
 
-- 🌍 **Multi-language support**: Python, JavaScript/TypeScript, Go, Rust, Java, C/C++, Ruby, PHP, and more
-- 🌳 Clean ASCII tree visualization with Unicode box characters
-- 🧠 Intelligent file analysis based on imports, comments, and folder context
-- 🎨 Beautiful terminal output using Rich
-- 🚫 Automatic filtering of noise folders (venv, node_modules, .git, etc.)
-- ⚡ Fast and lightweight - no ML, no AST parsing
-- 📦 Easy to install and use
+-  **Multi-language support**: Python, JavaScript/TypeScript, Go, Rust, Java, C/C++, Ruby, PHP, and more
+-  Clean ASCII tree visualization with Unicode box characters
+-  Intelligent file analysis based on imports, comments, and folder context
+-  Beautiful terminal output using Rich
+-  Automatic filtering of noise folders (venv, node_modules, .git, etc.)
+-  Fast and lightweight - no ML, no AST parsing
+-  Easy to install and use
 
 ## Installation
 

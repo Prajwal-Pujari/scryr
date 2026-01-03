@@ -13,6 +13,7 @@ from rich.table import Table
 from .scanner import scan_directory, DEFAULT_IGNORE
 from .analyzer import analyze_file
 from .renderer import render_tree
+from .statistics import collect_statistics, render_statistics, ProjectStats
 
 
 class RichHelpFormatter(argparse.HelpFormatter):
@@ -61,6 +62,7 @@ def print_help(console: Console) -> None:
     opts_table.add_row("-d, --depth N", "Maximum depth to traverse")
     opts_table.add_row("-i, --ignore PATTERN", "Add patterns to ignore")
     opts_table.add_row("--no-description", "Hide file descriptions")
+    opts_table.add_row("--stats", "Show project statistics")
     opts_table.add_row("-h, --help", "Show this help message")
     opts_table.add_row("--version", "Show version number")
     
@@ -73,7 +75,9 @@ def print_help(console: Console) -> None:
     examples = [
         ("scryr", "Map current directory"),
         ("scryr /path/to/project", "Map specific directory"),
+        ('scryr "my folder"', "Map folder with spaces"),
         ("scryr . --depth 3", "Limit tree depth"),
+        ("scryr . --stats", "Show statistics dashboard"),
         ("scryr . --no-description", "Show structure only"),
         ("scryr . -i logs -i temp", "Ignore custom patterns"),
     ]
@@ -126,6 +130,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Show this help message"
     )
+
+    parser.add_argument(
+        "--stats",
+        action="store_true",
+        help="Show project statistics dashboard"
+    )
     
     parser.add_argument(
         "--version",
@@ -161,7 +171,7 @@ def main() -> int:
         return 0
     
     # Resolve target path
-    target_path = Path(args.path).resolve()
+    target_path = Path(args.path).expanduser().resolve()
     
     # Validate path
     if not target_path.exists():
@@ -184,6 +194,13 @@ def main() -> int:
             ignore_patterns=ignore_patterns,
             max_depth=args.depth
         )
+        # If stats mode, show statistics instead of tree
+
+        if args.stats:
+            stats = ProjectStats()
+            collect_statistics(tree, stats)
+            render_statistics(stats, console)
+            return 0
         
         # Analyze files
         analyze_tree(tree, show_descriptions=not args.no_description)
